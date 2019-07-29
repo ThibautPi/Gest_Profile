@@ -18,6 +18,6 @@ app.use(bodyParser.json());
 app.use('/profile',require('./routes/profile'));
 
 // Start the server
-const port = process.env.PORT || 5003;
+const port = process.env.PORT || 5001;
 app.listen(port);
 console.log('Server listening at '+port);
