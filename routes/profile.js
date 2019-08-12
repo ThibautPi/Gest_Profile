@@ -1,15 +1,17 @@
 const express = require('express');
 const router = require('express-promise-router')();
+const passport = require('passport');
 
+const passportConf = require('../passport');
 const pController = require('../controllers/profile');
 const {validateParam, validateBody, schemas} = require('../helpers/routeHelpers');
 
-router.route('/')
-  .post(validateBody(schemas.postSchema),pController.newProfile);
+const passportJWT = passport.authenticate('jwt',{session:false});
 
-router.route('/:profileId')
-  .get(validateParam(schemas.idSchema,'profileId'),pController.getProfile)
-  .put(validateParam(schemas.idSchema,'profileId'),validateBody(schemas.profileSchema),pController.updateProfile);
+router.route('/')
+  .post(passportJWT,validateBody(schemas.profileSchema),pController.newProfile)
+  .get(passportJWT,pController.getProfile)
+  .put(passportJWT,validateBody(schemas.PutprofileSchema),pController.updateProfile);
 
 
 module.exports = router;

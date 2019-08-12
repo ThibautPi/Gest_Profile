@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
+    _id:{
+        type: String,
+        required: true
+    },
     firstName:{
         type: String,
     },
@@ -14,7 +18,7 @@ const profileSchema = new Schema({
         lowercase: true,
         required: true
     },
-    category:{
+    address:{
         type: String
     },
     organization:{

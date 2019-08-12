@@ -25,23 +25,30 @@ module.exports = {
           if(result.error){
             return res.status(400).json(result.error);
           }
-    
+
           if(!req.value) {
             req.value = {};
           }
           req.value['body'] = result.value;
           next();
         }
-    
+
     },
 
     schemas:{
         profileSchema: Joi.object().keys({
+            _id : Joi.string().guid(),
             firstName: Joi.string(),
             lastName: Joi.string(),
             email: Joi.string().required(),
-            category: Joi.string(),
+            address: Joi.string(),
             organization: Joi.string()
+        }),
+        PutprofileSchema: Joi.object().keys({
+          firstName: Joi.string(),
+          lastName: Joi.string(),
+          address: Joi.string(),
+          organization: Joi.string()
         }),
         idSchema: Joi.object().keys({
           param: Joi.string().guid().required()
